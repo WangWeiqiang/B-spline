@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<style>
+			*{
+				font-family:verdana;
+			}
+			html,body{
+				height:100%;
+			}
+			#wrapper{
+				width:80%;
+				height:80%;
+				margin-left:auto;
+				margin-right:auto;
+			}
+			#canvas{
+				border:solid 1px #555;
+				width:100%;	
+				height:600px;
+			}
+			.center{
+				text-align:center;
+			}
+			input[type=range]{
+				-webkit-appearance: none !important;
+				background: #900;
+				height: 10px;
+				width: 100px;
+				border-radius: 5px;
+				cursor: pointer;
+				border: 0;
+				outline: none;
+				padding: 0;
+			}
+			#controlpoint,#eraser,#save,#information{
+				cursor:pointer;
+				margin:5px 0 5px 10px;
+			}
+			
+		</style>
+	</head>
+	<body>
+		<div id="wrapper">
+			<p>
+				<h2 class="center">Plotting B-spline curves</h2>
+				<h3 class="center">DM6122 Assignment 2</h3>
+				<h4 class="center">By Wang Weiqiang</h4>
+			</p>
+		
+			<div id="canvas"></div>
+			<table width="100%">
+				<tr>
+					<td>
+						Degree: <input type="range" min="1" max="10" step="1" value="5" oninput="DegreeChanged(this)"><span id="degree">5</span>
+					</td>
+					<td style="text-align:right">
+						<img id="controlpoint" src="img/controlpoints.png" title="Show/Hide control points" />
+						<img id="eraser" src="img/eraser.png" alt="Clear canvas" title="Clear canvas"/>
+						<a href="" download="bspline.png" target="_blank" id="downloadlink"><img id="save" src="img/save.png" alt="Save as image" title="Save as image"/></a>
+						<img id="information" src="img/Help.png"/>
+					</td>
+				</tr>
+			</table>
+			
+			<p style="text-align:center">Drag and Drop The Control Points</p>
+			
+		</div>
+		<canvas id="bspline" width="1280" height="800"></canvas>
+		<script src="js/jquery-1.8.3.min.js"></script>
+		<script src="js/kinetic.js"></script>
+		<script src="js/main.js"></script>
+		<script>
+
+			//generate the curve
+			var spline = new Spline({
+				points:[{x:130, y:130}, {x:250, y:30}, {x:400, y:200}, {x:50, y:320}, {x:100, y:500}, {x:300, y:600}, {x:600, y:530}, {x:480, y:300}, {x:500, y:100}, {x:700, y:50}, {x:850, y:320}, {x:600, y:600}, {x:350, y:520}, {x:300, y:400}],
+				duration:15
+			});
+
+			// get the canvas context (assuming <canvas id="canvas"></canvas>)
+
+			var canvas = document.getElementById("bspline");
+			var ctx = canvas.getContext("2d");
+
+			// draw: 
+
+			spline.draw(ctx);
+		</script>
+	</body>
+</html>

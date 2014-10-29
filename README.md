@@ -1,7 +1,7 @@
 B-spline
 ========
 
-To draw B-spline with HTML5
+To draw Bezier / B-spline curve with HTML5
 
 DEMO : http://wangweiqiang.net/lib/b-spline
 
